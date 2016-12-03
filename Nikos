@@ -1,0 +1,172 @@
+import acm.program.*;
+
+public class exone extends Program {
+	public void run() {
+			int currentyear=readInt("Enter the current year: ");
+				while (currentyear<0) {
+					currentyear=readInt("Enter the current year: ");
+				}
+			int currentmonth=readInt("Enter the current month: ");
+				while (currentmonth<0 || currentmonth>12) {
+					currentmonth=readInt("Enter the current month: ");
+				}
+			int currentday=readInt("Enter the current day: " );
+				while (currentday<0 || currentday>30) {
+					currentday=readInt("Enter the current day: " );
+				}
+			int nameofday=readInt("Enter the name of day (use values from 0 to 6): " ); // ET 0-6 ET=eleghos timwn//
+				while (nameofday<0 || nameofday>6) {
+					nameofday=readInt("Enter the name of day (use values from 0 to 6): " );
+				}
+			int pastyear=readInt("Enter a past year of your choice: " ); // ET year<=currentyear//
+				while(pastyear>currentyear) {
+					pastyear=readInt("Enter a past year of your choice: " );
+				}
+			int pastmonth=readInt("Enter a month of your choice: "); // ET 1-12 if gia ton panw periorismo klp//
+				if (pastyear==currentyear) {
+					while (pastmonth<1 || pastmonth>12 || pastmonth>currentmonth) {
+						pastmonth=readInt("Enter a month of your choice: ");
+					}
+				}else {
+					while (pastmonth<1 || pastmonth>12) {
+						pastmonth=readInt("Enter a month of your choice: ");
+					}
+				}
+			int pastday=readInt("Enter a day of your choice: "); // ET 1-30 if gia ton panw periorismo klp//
+				if (pastyear==currentyear && pastmonth==currentmonth) {
+					while (pastday<1 || pastday>30 || pastday>currentday) {
+						pastday=readInt("Enter a day of your choice: ");
+					}
+				}else { 
+					while (pastday<1 || pastday>30) {
+						pastday=readInt("Enter a day of your choice: ");
+					}		
+				}
+			boolean flag1=false;
+			boolean flag2=false;
+			int value1=0;
+			int value2=0;
+			int totaldays1;
+			int totaldays2;
+			
+			
+			// for totaldays1//
+			for (int i=0;i<currentyear;i++) {
+				if ((i%4==0 && i%100!=0) || (i%400==0)) { // tote to etos einai disekto //
+					value1=value1 + 1;	
+				}
+			}
+				
+			if ((currentyear%4==0 && currentyear%100!=0) || (currentyear%400==0)) { // tote to etos einai disekto //
+				flag1=true;
+			}	
+			
+			if (currentmonth==1) {
+				totaldays1=currentday;
+			}else if (currentmonth==2) {
+				totaldays1=31+currentday;
+			}else if (currentmonth==3) {
+				totaldays1=59+currentday;
+			}else if (currentmonth==4) {
+				totaldays1=90+currentday;
+			}else if (currentmonth==5) {
+				totaldays1=120+currentday;
+			}else if (currentmonth==6) {
+				totaldays1=151+currentday;
+			}else if (currentmonth==7) {
+				totaldays1=181+currentday;
+			}else if (currentmonth==8) {
+				totaldays1=212+currentday;
+			}else if (currentmonth==9) {
+				totaldays1=243+currentday;
+			}else if (currentmonth==10) {
+				totaldays1=273+currentday;
+			}else if (currentmonth==11) {
+				totaldays1=304+currentday;
+			}else {
+				totaldays1=334+currentday;
+			}
+			
+			if (flag1==true && currentmonth>2) {
+				totaldays1=totaldays1 + (currentyear-1)*365 + value1 + 1;
+			}else {
+				totaldays1=totaldays1 + (currentyear-1)*365 +  value1;
+			}	
+			
+			// for totaldays2//
+			for (int i=0;i<pastyear;i++) {
+				if ((i%4==0 && i%100!=0) || (i%400==0)) { // tote to etos einai disekto//
+					value2=value2 + 1;		
+				}
+			}	
+				
+			if ((pastyear%4==0 && pastyear%100!=0) || (pastyear%400==0)) { // tote to etos einai disekto//
+				flag2=true;
+			}	
+			
+			if (pastmonth==1) {
+				totaldays2=pastday;
+			}else if (pastmonth==2) {
+				totaldays2=31+pastday;
+			}else if (pastmonth==3) {
+				totaldays2=59+pastday;
+			}else if (pastmonth==4) {
+				totaldays2=90+pastday;
+			}else if (pastmonth==5) {
+				totaldays2=120+pastday;
+			}else if (pastmonth==6) {
+				totaldays2=151+pastday;
+			}else if (pastmonth==7) {
+				totaldays2=181+pastday;
+			}else if (pastmonth==8) {
+				totaldays2=212+pastday;
+			}else if (pastmonth==9) {
+				totaldays2=243+pastday;
+			}else if (pastmonth==10) {
+				totaldays2=273+pastday;
+			}else if (pastmonth==11) {
+				totaldays2=304+pastday;
+			}else {
+				totaldays2=334+pastday;
+			}
+			
+			if (flag2==true && pastmonth>2) {
+				totaldays2=totaldays2 + (pastyear-1)*365 + value2 + 1;
+			}else {
+				totaldays2=totaldays2 + (pastyear-1)*365 + value2;
+			}
+			
+			println("Days since=" + (totaldays1-totaldays2));
+			
+			
+			int total=totaldays1-totaldays2;
+			
+			int lawl=total%7;
+			
+			int day=nameofday-lawl;
+				
+			if (day<0) {
+				switch (day) {
+					case -1:
+						day=6;
+					break;
+					case -2:
+						day=5;
+					break;
+					case -3:
+						day=4;
+					break;
+					case -4:
+						day=3;
+					break;
+					case -5:
+						day=2;
+					break;
+					case -6:
+						day=1;
+					break;
+				}
+			}
+				println (day);		
+	}
+	
